@@ -4,6 +4,7 @@ class VanguardCard {
 	String name
         String clan
         String race
+        String flavorText
 	Integer grade
 	Integer power
 	Integer crit

@@ -1,4 +1,5 @@
 <%@ page import="com.trinary.tcg.cards.VanguardCard" %>
+<%@ page import="com.trinary.tcg.cards.Image" %>
 <div class="card-area">
   <div class="card-preview">
     <g:if test="${vanguardCardInstance}">
@@ -69,6 +70,14 @@
             </label>
             <g:textField name="race" value="${vanguardCardInstance?.race}"/>
     </div>
+    
+    <div class="fieldcontain ${hasErrors(bean: vanguardCardInstance, field: 'flavorText', 'error')} ">
+            <label for="flavorText">
+                    <g:message code="vanguardCard.flavorText.label" default="Flavor Text" />
+
+            </label>
+            <g:textField name="flavorText" value="${vanguardCardInstance?.flavorText}"/>
+    </div>
 
     <div class="fieldcontain ${hasErrors(bean: vanguardCardInstance, field: 'effects', 'error')} ">
             <label for="effects">
@@ -84,7 +93,14 @@
                     <g:message code="vanguardCard.artworkFile.label" default="Artwork File" />
 
             </label>
-            <g:textField name="artworkFile" value="${vanguardCardInstance?.artworkFile}"/>
+            <%
+              List artworks = []
+              
+              Image.list().each {
+                artworks += [name: it.name, file: it.localPath]
+              }
+            %>
+            <g:select name="artworkFile" from="${artworks*.name}" keys="${artworks*.file}" value="${vanguardCardInstance?.artworkFile}" />
     </div>
   </div>
 </div>
