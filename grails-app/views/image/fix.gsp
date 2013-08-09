@@ -1,5 +1,8 @@
 <html>
     <head>
+        <meta name="layout" content="main">
+        <g:set var="entityName" value="${message(code: 'image.label', default: 'Image')}" />
+        <title>Cropping image...</title>
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script>
             $(function() {
@@ -31,18 +34,17 @@
                 });
 
                 // Applet size adjustment
-                /*
                 var imageDataJson = $("#crop-applet").get(0).getImageDataJson();
                 var imageData = jQuery.parseJSON(imageDataJson);
                 console.log("W: " + imageData['width']);
                 console.log("H: " + imageData['height']);
                 $("#crop-applet").css("width", imageData['width']);
                 $("#crop-applet").css("height", imageData['height']);
-                */
             });
         </script>
     </head>
     <body>
+        <h3>Please select the area of the picture you want to use.</h3>
         <applet id="crop-applet" code="com.trinary.imageedit.ImageEditApplet.class" codebase="${request.contextPath}/applets" archive="ImageEditApplet.jar" style="border: 1px solid black;" width="100%" height="100%">
             <param name="image-file" value="${createLink(action: 'get', id: id, absolute: true)}" />
             <param name="crop-width" value="327" />

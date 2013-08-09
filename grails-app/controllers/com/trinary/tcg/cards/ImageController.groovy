@@ -35,9 +35,14 @@ class ImageController {
             render(view: "create", model: [imageInstance: imageInstance])
             return
         }
+        
+        if (imageInstance.invalid) {
+            redirect(action: "fix", id: imageInstance.id)
+            return
+        }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'image.label', default: 'Image'), imageInstance.id])
-        redirect(action: "show", id: imageInstance.id)
+        redirect(action: "list")
     }
 
     def show(Long id) {
